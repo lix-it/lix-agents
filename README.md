@@ -6,14 +6,41 @@ Agents can't — and shouldn't — hold long-lived API keys. `lix-agents` gives 
 
 ## Add to your agent
 
+Install the skill and it handles everything — including installing the CLI for you. No manual setup required.
+
 ### Claude Code
+
+First, add the marketplace:
 
 ```
 /plugin marketplace add lix-it/lix-agents
+```
+
+Then install the plugin:
+
+```
 /plugin install lix-agents@lix-agents
 ```
 
 The `/lix-agents` skill will be available immediately. It tracks the `stable` branch.
+
+### Claude Cowork
+
+1. Open Claude Desktop and switch to the **Cowork** tab.
+2. Click **Customize** in the left sidebar.
+3. Click **Browse plugins**.
+4. If `lix-agents` isn't listed, click **Upload** and provide the GitHub URL: `https://github.com/lix-it/lix-agents`
+5. Click **Install** on the `lix-agents` plugin.
+
+Alternatively, type these commands directly in a Cowork task:
+
+```
+/plugin marketplace add lix-it/lix-agents
+```
+
+```
+/plugin install lix-agents@lix-agents
+```
 
 ### Amp
 
@@ -23,21 +50,51 @@ amp skill add lix-it/lix-agents/lix-agents
 
 Or open the command palette (`Ctrl+O`), select **skill: add**, and enter `lix-it/lix-agents/lix-agents`.
 
-### Other agents (manual)
+### Claude Code / Cowork (manual)
 
-Copy the skill file into your project. Any agent that reads `SKILL.md` files will pick it up:
+If the marketplace commands aren't working, you can install the plugin manually:
+
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/lix-it/lix-agents.git
+   ```
+2. In Claude Code, run:
+   ```
+   /plugin install /path/to/lix-agents
+   ```
+   In Cowork, click **Customize** → **Browse plugins** → **Upload**, then select the `lix-agents` folder you cloned.
+
+### Other agents
+
+Any agent that supports [Agent Skills](https://agentskills.io) (Cursor, Gemini CLI, Windsurf, Roo Code, OpenHands, GitHub Copilot, and [many more](https://agentskills.io)) can use this skill. Copy the `SKILL.md` into the skills directory your agent expects:
 
 ```bash
-# For Claude Code / Claude-compatible agents
+# Claude-compatible agents (.claude/skills/)
 mkdir -p .claude/skills/lix-agents
 curl -fsSL https://raw.githubusercontent.com/lix-it/lix-agents/stable/skills/lix-agents/SKILL.md \
   -o .claude/skills/lix-agents/SKILL.md
 
-# For Amp-compatible agents
+# Amp-compatible agents (.agents/skills/)
 mkdir -p .agents/skills/lix-agents
 curl -fsSL https://raw.githubusercontent.com/lix-it/lix-agents/stable/skills/lix-agents/SKILL.md \
   -o .agents/skills/lix-agents/SKILL.md
 ```
+
+### Manual CLI install (optional)
+
+Only needed if your agent can't install it automatically, or if you want to use `lix-agents` outside of an agent.
+
+**Homebrew:**
+```bash
+brew install lix-it/lix-agents/lix-agents
+```
+
+**Go install:**
+```bash
+go install github.com/lix-it/lix-agents@latest
+```
+
+**Binary download:** grab the latest from [GitHub Releases](https://github.com/lix-it/lix-agents/releases) (macOS, Linux, Windows).
 
 ## How it works
 
@@ -47,25 +104,6 @@ curl -fsSL https://raw.githubusercontent.com/lix-it/lix-agents/stable/skills/lix
 4. **The agent gets the token** — The temporary API token is printed to stdout, ready to use.
 
 No passwords or long-lived secrets ever pass through the agent.
-
-## Install the CLI
-
-### Homebrew
-
-```bash
-brew tap lix-it/lix-agents
-brew install lix-agents
-```
-
-### Go install
-
-```bash
-go install github.com/lix-it/lix-agents@latest
-```
-
-### Binary download
-
-Grab the latest release for your platform from [GitHub Releases](https://github.com/lix-it/lix-agents/releases). Binaries are available for macOS (Intel & Apple Silicon), Linux, and Windows.
 
 ## Quick start
 
