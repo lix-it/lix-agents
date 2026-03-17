@@ -19,7 +19,7 @@ func init() {
 		Use:   "auth",
 		Short: "Authentication commands",
 	}
-	authCmd.AddCommand(newLoginCmd(), newTokenCmd())
+	authCmd.AddCommand(newLoginCmd(), newTokenCmd(), newStatusCmd())
 	rootCmd.AddCommand(authCmd)
 }
 
