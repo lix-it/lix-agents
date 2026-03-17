@@ -1,6 +1,6 @@
 ---
 name: lix-agents
-description: Obtain temporary Lix API tokens via CLI with human email approval. Use when you need authenticated access to the Lix API, need to enrich data via Lix, or need API credentials for any Lix service.
+description: Obtain temporary Lix API tokens via CLI with human email approval.
 ---
 
 # Lix Agents
@@ -20,8 +20,9 @@ Or download a binary from [GitHub Releases](https://github.com/lix-it/lix-agents
 
 ## When to use this
 
-- You need to call any `https://api.lix-it.com` endpoint that requires authentication
+- You need authenticated access to the Lix API
 - You need to enrich LinkedIn profiles, companies, or other data via Lix
+- You need API credentials for any Lix service
 - You don't already have a valid Lix API token in your environment
 
 ## How it works
