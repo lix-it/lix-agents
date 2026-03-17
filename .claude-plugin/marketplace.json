@@ -16,7 +16,7 @@
         "ref": "stable"
       },
       "description": "Obtain temporary Lix API tokens via CLI with human email approval",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "Lix"
       },
