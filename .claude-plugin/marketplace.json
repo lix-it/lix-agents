@@ -1,25 +1,13 @@
 {
   "name": "lix-agents",
   "owner": {
-    "name": "Lix",
-    "email": "support@lix-it.com"
-  },
-  "metadata": {
-    "description": "LinkedIn API tools for AI agents"
+    "name": "Lix"
   },
   "plugins": [
     {
       "name": "lix-agents",
       "source": ".",
-      "description": "Obtain temporary Lix API tokens via CLI with human email approval",
-      "version": "1.0.3",
-      "author": {
-        "name": "Lix"
-      },
-      "homepage": "https://github.com/lix-it/lix-agents",
-      "repository": "https://github.com/lix-it/lix-agents",
-      "license": "Apache-2.0",
-      "keywords": ["lix", "api", "auth", "tokens", "agents"]
+      "description": "Obtain temporary Lix API tokens via CLI with human email approval"
     }
   ]
 }

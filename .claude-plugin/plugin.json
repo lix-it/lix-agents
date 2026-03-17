@@ -1,12 +1,8 @@
 {
   "name": "lix-agents",
+  "version": "1.0.4",
   "description": "Obtain temporary Lix API tokens via CLI with human email approval",
-  "version": "1.0.3",
   "author": {
     "name": "Lix"
-  },
-  "homepage": "https://github.com/lix-it/lix-agents",
-  "repository": "https://github.com/lix-it/lix-agents",
-  "license": "Apache-2.0",
-  "keywords": ["lix", "api", "auth", "tokens", "agents"]
+  }
 }
