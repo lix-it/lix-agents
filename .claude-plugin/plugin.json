@@ -1,7 +1,7 @@
 {
   "name": "lix-agents",
   "description": "Obtain temporary Lix API tokens via CLI with human email approval",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": {
     "name": "Lix"
   },
