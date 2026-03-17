@@ -10,13 +10,9 @@
   "plugins": [
     {
       "name": "lix-agents",
-      "source": {
-        "source": "github",
-        "repo": "lix-it/lix-agents",
-        "ref": "stable"
-      },
+      "source": ".",
       "description": "Obtain temporary Lix API tokens via CLI with human email approval",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "author": {
         "name": "Lix"
       },
