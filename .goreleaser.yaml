@@ -1,0 +1,62 @@
+version: 2
+
+project_name: lix-agents
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - main: .
+    binary: lix-agents
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+
+brews:
+  - repository:
+      owner: lix-it
+      name: homebrew-lix-agents
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    directory: Formula
+    homepage: "https://github.com/lix-it/lix-agents"
+    description: "CLI tool for obtaining temporary Lix API tokens with email-based approval"
+    license: "Apache-2.0"
+    install: |
+      bin.install "lix-agents"
+    test: |
+      system "#{bin}/lix-agents", "--help"
+
+release:
+  github:
+    owner: lix-it
+    name: lix-agents
+  draft: false
+  prerelease: auto
+  name_template: "v{{ .Version }}"
