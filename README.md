@@ -58,7 +58,55 @@ lix-agents auth token    Request a temporary API token (requires email approval)
 
 ## For AI agents
 
-This tool ships with a [Claude Code skill](https://code.claude.com/docs/en/skills) at `.claude/skills/lix-agents/SKILL.md`. Point your agent at this repository and it will automatically know how to install and use `lix-agents` to authenticate with the Lix API.
+This repo ships with a skill (`skills/lix-agents/SKILL.md`) that teaches any compatible agent how to install and use `lix-agents` to authenticate with the Lix API.
+
+### Claude Code (Plugin)
+
+Install as a Claude Code plugin from the marketplace:
+
+```
+/plugin marketplace add lix-it/lix-agents
+/plugin install lix-agents@lix-agents
+```
+
+The `/lix-agents` skill will then be available in Claude Code. The plugin tracks the `stable` branch for reliable releases.
+
+### Amp
+
+Install the skill directly from GitHub:
+
+```
+amp skill add lix-it/lix-agents/lix-agents
+```
+
+Or from the Amp command palette (`Ctrl+O`), select **skill: add** and enter `lix-it/lix-agents/lix-agents`.
+
+### Manual (any agent that supports SKILL.md)
+
+Copy the skill file into your project or user-level skill directory:
+
+```bash
+# Project-level (committed to your repo)
+mkdir -p .claude/skills/lix-agents
+curl -fsSL https://raw.githubusercontent.com/lix-it/lix-agents/stable/skills/lix-agents/SKILL.md \
+  -o .claude/skills/lix-agents/SKILL.md
+
+# Or for Amp's project-level convention
+mkdir -p .agents/skills/lix-agents
+curl -fsSL https://raw.githubusercontent.com/lix-it/lix-agents/stable/skills/lix-agents/SKILL.md \
+  -o .agents/skills/lix-agents/SKILL.md
+```
+
+Any agent that reads `SKILL.md` files from `.claude/skills/`, `.agents/skills/`, or `~/.config/agents/skills/` will pick it up automatically.
+
+## Release channels
+
+The plugin uses a `stable` branch for production-ready releases. The `main` branch tracks the latest development state.
+
+| Branch   | Purpose                              |
+|----------|--------------------------------------|
+| `stable` | Tested releases — plugin default     |
+| `main`   | Latest development                   |
 
 ## Building from source
 
