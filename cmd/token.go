@@ -35,9 +35,10 @@ type tokenRequestResponse struct {
 
 // tokenStatusResponse is the JSON response from the status polling endpoint.
 type tokenStatusResponse struct {
-	Status   string `json:"status"`
-	APIToken string `json:"api_token"`
-	Message  string `json:"message"`
+	Status    string `json:"status"`
+	APIToken  string `json:"api_token"`
+	ExpiresAt string `json:"expires_at"`
+	Message   string `json:"message"`
 }
 
 // apiErrorResponse is the standard API error envelope.
@@ -134,6 +135,9 @@ func pollForApproval(creds *credentials.Credentials, requestToken string) error 
 		case "approved":
 			fmt.Println("\nToken approved!")
 			fmt.Printf("\nTemporary API Token: %s\n", status.APIToken)
+			if status.ExpiresAt != "" {
+				fmt.Printf("Expires at: %s\n", status.ExpiresAt)
+			}
 			if status.Message != "" {
 				fmt.Println(status.Message)
 			}
