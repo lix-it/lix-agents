@@ -15,7 +15,7 @@ Starts the `lix-agents` authentication flow. This will:
 
 ```bash
 # Install if missing
-which lix-agents || brew tap lix-it/lix-agents && brew install lix-agents
+which lix-agents || (brew tap lix-it/lix-agents && brew install lix-agents)
 
 # Start login
 lix-agents auth login
