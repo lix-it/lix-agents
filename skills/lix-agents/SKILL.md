@@ -30,9 +30,11 @@ which lix-agents
 If the command is not found, tell the user you need to install it and why — it's a CLI that manages Lix API authentication for AI agents. Then download the latest binary from [GitHub Releases](https://github.com/lix-it/lix-agents/releases):
 
 ```bash
+mkdir -p ~/.local/bin
 VERSION=$(curl -sI https://github.com/lix-it/lix-agents/releases/latest | grep -i ^location | sed 's|.*/v||;s/\r//')
 curl -fsSL "https://github.com/lix-it/lix-agents/releases/download/v${VERSION}/lix-agents_${VERSION}_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" \
-  | tar xz -C /usr/local/bin lix-agents
+  | tar xz -C ~/.local/bin lix-agents
+export PATH="$HOME/.local/bin:$PATH"
 ```
 
 If `curl` is unavailable, suggest `go install github.com/lix-it/lix-agents@latest` or downloading manually from [GitHub Releases](https://github.com/lix-it/lix-agents/releases).
