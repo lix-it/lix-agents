@@ -10,7 +10,7 @@ Install the skill and it handles everything — including installing the CLI for
 
 ### Claude Code
 
-First, add the marketplace:
+Add the marketplace:
 
 ```
 /plugin marketplace add lix-it/lix-agents
@@ -22,25 +22,17 @@ Then install the plugin:
 /plugin install lix-agents@lix-agents
 ```
 
-The `/lix-agents` skill will be available immediately. It tracks the `stable` branch.
+The `/lix-agents:lix-agents` skill will be available immediately. Run `/reload-plugins` if you don't see it. It tracks the `stable` branch.
 
 ### Claude Cowork
 
-1. Open Claude Desktop and switch to the **Cowork** tab.
-2. Click **Customize** in the left sidebar.
+1. Open the Claude Desktop app and switch to the **Cowork** tab.
+2. Click the **Customize** menu in the left sidebar.
 3. Click **Browse plugins**.
-4. If `lix-agents` isn't listed, click **Upload** and provide the GitHub URL: `https://github.com/lix-it/lix-agents`
+4. Click **Upload** and provide the GitHub URL: `https://github.com/lix-it/lix-agents`
 5. Click **Install** on the `lix-agents` plugin.
 
-Alternatively, type these commands directly in a Cowork task:
-
-```
-/plugin marketplace add lix-it/lix-agents
-```
-
-```
-/plugin install lix-agents@lix-agents
-```
+Once installed, type `/` or click the **+** button to see the `lix-agents` skill.
 
 ### Amp
 
@@ -52,15 +44,15 @@ Or open the command palette (`Ctrl+O`), select **skill: add**, and enter `lix-it
 
 ### Claude Code / Cowork (manual)
 
-If the marketplace commands aren't working, you can install the plugin manually:
+If the marketplace or upload isn't working, you can load the plugin from a local clone:
 
 1. Clone the repo:
    ```bash
    git clone https://github.com/lix-it/lix-agents.git
    ```
-2. In Claude Code, run:
-   ```
-   /plugin install /path/to/lix-agents
+2. In Claude Code, load it with:
+   ```bash
+   claude --plugin-dir /path/to/lix-agents
    ```
    In Cowork, click **Customize** → **Browse plugins** → **Upload**, then select the `lix-agents` folder you cloned.
 
