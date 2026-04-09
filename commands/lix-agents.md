@@ -14,8 +14,11 @@ Starts the `lix-agents` authentication flow. This will:
 ## Run
 
 ```bash
-# Install if missing
-which lix-agents || (brew tap lix-it/lix-agents && brew install lix-agents)
+# Install if missing — download the latest binary from GitHub Releases
+which lix-agents || (
+  curl -fsSL https://github.com/lix-it/lix-agents/releases/latest/download/lix-agents_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz \
+    | tar xz -C /usr/local/bin lix-agents
+)
 
 # Start login
 lix-agents auth login
