@@ -27,13 +27,29 @@ Tell the user: *"First, I'll check if the lix-agents CLI is installed on your ma
 which lix-agents
 ```
 
-If the command is not found, tell the user you need to install it and why — it's a CLI that manages Lix API authentication for AI agents. Then install it:
+If the command is not found, tell the user you need to install it and why — it's a CLI that manages Lix API authentication for AI agents. Install using one of these options:
+
+**Homebrew (macOS / Linux):**
 
 ```bash
 brew tap lix-it/lix-agents && brew install lix-agents
 ```
 
-If brew is unavailable, suggest `go install github.com/lix-it/lix-agents@latest` or downloading from [GitHub Releases](https://github.com/lix-it/lix-agents/releases).
+**Download binary:**
+
+```bash
+mkdir -p ~/.local/bin
+VERSION=$(curl -sI https://github.com/lix-it/lix-agents/releases/latest | grep -i ^location | sed 's|.*/v||;s/\r//')
+curl -fsSL "https://github.com/lix-it/lix-agents/releases/download/v${VERSION}/lix-agents_${VERSION}_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" \
+  | tar xz -C ~/.local/bin lix-agents
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+**Go install:**
+
+```bash
+go install github.com/lix-it/lix-agents@latest
+```
 
 ### Step 2: Check if the user is already logged in
 

@@ -13,11 +13,33 @@ Starts the `lix-agents` authentication flow. This will:
 
 ## Run
 
-```bash
-# Install if missing
-which lix-agents || (brew tap lix-it/lix-agents && brew install lix-agents)
+Install the CLI using one of the options below, then run `lix-agents auth login`.
 
-# Start login
+### Option A: Homebrew (macOS / Linux)
+
+```bash
+brew tap lix-it/lix-agents && brew install lix-agents
+```
+
+### Option B: Download binary
+
+```bash
+mkdir -p ~/.local/bin
+VERSION=$(curl -sI https://github.com/lix-it/lix-agents/releases/latest | grep -i ^location | sed 's|.*/v||;s/\r//')
+curl -fsSL "https://github.com/lix-it/lix-agents/releases/download/v${VERSION}/lix-agents_${VERSION}_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" \
+  | tar xz -C ~/.local/bin lix-agents
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+### Option C: Go install
+
+```bash
+go install github.com/lix-it/lix-agents@latest
+```
+
+## Login
+
+```bash
 lix-agents auth login
 ```
 
