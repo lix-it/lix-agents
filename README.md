@@ -112,6 +112,30 @@ lix-agents auth token
 curl -H "X-Api-Key: <token>" https://api.lix-it.com/v1/person
 ```
 
+## Look up API endpoints (`lix.sh`)
+
+The Lix API reference is also served as a read-only SSH filesystem at `lix.sh` (powered by [OpenLore](https://github.com/aakarim/go-openlore)). No SSH key required — connections are anonymous. Agents can explore the docs with the same `ls`/`cat`/`grep`/`find` they already know, without burning context-window tokens on the whole reference:
+
+```bash
+# Discover the API surface
+ssh lix.sh "tree -L 2 /"
+
+# Find the right endpoint
+ssh lix.sh "grep -rli 'email' /api"
+
+# Read just one endpoint's reference
+ssh lix.sh "cat /api/contact.md"
+
+# Pull a single section (saves context)
+ssh lix.sh "sed -n '/## Email from LinkedIn profile/,/^## /p' /api/contact.md"
+```
+
+Available files under `/api/`: `lix_account.md`, `account.md`, `disambiguation.md`, `enrichment.md`, `activity.md`, `linkedin.md`, `lookc.md`, `ai.md`, `contact.md`, `errors.md`, plus `agents.md` (this guide) and `/index.md` (intro + auth).
+
+Same content is also available on the web at [https://lix.sh](https://lix.sh) and the rendered reference at [https://lix-it.com/api](https://lix-it.com/api).
+
+The bundled [`/lix-agents` skill](skills/lix-agents/SKILL.md) tells agents to consult `lix.sh` after they have a token, so they pick the right endpoint without you having to paste the docs into context.
+
 ## Usage
 
 Run `lix-agents --help` for the full command reference.

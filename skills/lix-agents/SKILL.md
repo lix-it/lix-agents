@@ -90,8 +90,51 @@ Set the token in the `Authorization` header for API requests:
 Authorization: Bearer <token>
 ```
 
-All requests go to `https://api.lix-it.com`. See the [Lix API docs](https://lix-it.com/docs) for available endpoints, request formats, and response formats.
+All requests go to `https://api.lix-it.com`.
+
+### Step 6: Look up endpoint details over SSH (`lix.sh`)
+
+Tell the user: *"To find the right endpoint and parameters for this task, I'll query the Lix API docs over SSH at `lix.sh`. It's a read-only docs filesystem — no API token needed."*
+
+The Lix API reference is published as an [OpenLore](https://github.com/aakarim/go-openlore) SSH server at `lix.sh`. No SSH key required — connections are anonymous and read-only. Use the bash commands you already know:
+
+```bash
+# See what's available
+ssh lix.sh "tree -L 2 /"
+
+# Find the endpoint that does what you need
+ssh lix.sh "grep -rli 'email'   /api"   # which file mentions email?
+ssh lix.sh "grep -rn  'POST '   /api"   # all POST endpoints
+ssh lix.sh "grep -rn  'GET '    /api"   # all GET endpoints
+
+# Read a specific endpoint reference
+ssh lix.sh "cat /api/contact.md"
+ssh lix.sh "cat /api/enrichment.md"
+ssh lix.sh "cat /api/errors.md"
+
+# Pull just the section you need (saves context window)
+ssh lix.sh "sed -n '/## Email from LinkedIn profile/,/^## /p' /api/contact.md"
+```
+
+Available endpoint files under `/api/`:
+
+| File                  | What it covers                          |
+| --------------------- | --------------------------------------- |
+| `lix_account.md`      | accounts and credit balances            |
+| `account.md`          | managed accounts                        |
+| `disambiguation.md`   | entity disambiguation                   |
+| `enrichment.md`       | profile and company enrichment          |
+| `activity.md`         | activity endpoints                      |
+| `linkedin.md`         | direct LinkedIn endpoints               |
+| `lookc.md`            | Lookc agent endpoints                   |
+| `ai.md`               | AI endpoints                            |
+| `contact.md`          | contact / email lookup                  |
+| `errors.md`           | error reference                         |
+
+If your environment doesn't allow outbound SSH on port 22, the same docs are at [https://lix.sh](https://lix.sh) (web) or browse the rendered reference at [https://lix-it.com/api](https://lix-it.com/api).
 
 ## Reference
 
 Run `lix-agents --help` for the full command reference.
+
+For API endpoint details, use `ssh lix.sh "cat /api/<endpoint>.md"` (see Step 6).
